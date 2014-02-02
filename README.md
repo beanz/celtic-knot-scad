@@ -21,7 +21,7 @@ where the first parameter is an kind of ASCII art for the desired
 pattern and ```tile_width``` is the knot tile size.  The "alphabet" for
 pieces is described in ```knot-piece-alphabet.scad```.  Each pieces is
 a 2x2 square of smaller knot parts (called tiles in the code).
-However, "edge" pieces have some empty space.
+However, edge and corner pieces have some empty tiles.
 
 The second API uses knot tiles and looks like:
 
@@ -35,3 +35,8 @@ where the first parameter is an ASCII art for the desired pattern and
 
 The "alphabet" for tiles is described in ```knot-tile-alphabet.scad```.
 
+License
+-------
+
+This work is licensed under a Creative Commons Attribution-ShareAlike
+4.0 International License.
