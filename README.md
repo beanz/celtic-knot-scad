@@ -15,11 +15,11 @@ parts (called pieces in the code) and looks like:
 
     knot([ "<~>",
            "!&;",
-           "[-]" ], sw = 5);
+           "[-]" ], tile_width = 5);
 
 where the first parameter is an kind of ASCII art for the desired
-pattern and {{{sw}}}} is the knot tile size.  The "alphabet" for
-pieces is described in {{{knot-piece-alphabet.scad}}}.  Each pieces is
+pattern and ```tile_width``` is the knot tile size.  The "alphabet" for
+pieces is described in ```knot-piece-alphabet.scad```.  Each pieces is
 a 2x2 square of smaller knot parts (called tiles in the code).
 However, "edge" pieces have some empty space.
 
@@ -28,10 +28,10 @@ The second API uses knot tiles and looks like:
     fine_knot([ "<rq>",
                 "AtYF",
                 "EGhW",
-                "[sd]" ], sw = 5);
+                "[sd]" ], tile_width = 5);
 
 where the first parameter is an ASCII art for the desired pattern and
-{{{sw}}}} is the knot tile size.
+```tile_width``` is the knot tile size.
 
-The "alphabet" for tiles is described in {{{knot-tile-alphabet.scad}}}.
+The "alphabet" for tiles is described in ```knot-tile-alphabet.scad```.
 
