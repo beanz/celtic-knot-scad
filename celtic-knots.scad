@@ -406,17 +406,11 @@ module knot_tile_boundary(tile_width, tile_height) {
     cube([tile_width*1.001, tile_width*1.001, tile_height*1.001], center = true);
 }
 
-module make_knot_tile(tile_width, tile_height) {
-  intersection() {
-    knot_tile_boundary(tile_width, tile_height);
-    children();
-  }
-}
-
 module cross(tile_width, tile_height, ribbon_width, gap) {
   gap2=gap*sqrt(2);
 
-  make_knot_tile(tile_width, tile_height) {
+  intersection() {
+    knot_tile_boundary(tile_width, tile_height);
     difference() {
       union() {
         rotate([0,0,-45])
@@ -436,22 +430,25 @@ module curve(tile_width = 5, tile_height, ribbon_width) {
   cra=66;
   cr=.5*tile_width/cos(cra);
 
-  make_knot_tile(tile_width, tile_height) {
-    intersection() {
-      translate([0,-tile_width/2*cos(cra),0])
-      rotate([0,0,cra]) translate([cr*1.5,0,0]) cube(cr*3, center = true);
-      translate([ tile_width/2,
-                  (tile_width-ribbon_width)/2-(cr-ribbon_width/2), 0])
-        rotate_extrude() {
-          translate([cr-ribbon_width/2, 0, 0])
-            square([ribbon_width, tile_height*2], center = true);
-        }
-    }
-    difference() {
-      rotate([0,0,-45])
-        cube([ribbon_width,tile_width*2, tile_height*2], center = true);
-      translate([0,-tile_width/2*cos(cra),0])
-      rotate([0,0,cra]) translate([cr*1.5,0,0]) cube(cr*3, center = true);
+  intersection() {
+    knot_tile_boundary(tile_width, tile_height);
+    union() {
+      intersection() {
+        translate([0,-tile_width/2*cos(cra),0])
+        rotate([0,0,cra]) translate([cr*1.5,0,0]) cube(cr*3, center = true);
+        translate([ tile_width/2,
+                    (tile_width-ribbon_width)/2-(cr-ribbon_width/2), 0])
+          rotate_extrude() {
+            translate([cr-ribbon_width/2, 0, 0])
+              square([ribbon_width, tile_height*2], center = true);
+          }
+      }
+      difference() {
+        rotate([0,0,-45])
+          cube([ribbon_width,tile_width*2, tile_height*2], center = true);
+        translate([0,-tile_width/2*cos(cra),0])
+        rotate([0,0,cra]) translate([cr*1.5,0,0]) cube(cr*3, center = true);
+      }
     }
   }
 }
@@ -459,7 +456,8 @@ module curve(tile_width = 5, tile_height, ribbon_width) {
 module cross_curve(tile_width = 5, tile_height, ribbon_width, gap) {
   gap2=gap*sqrt(2);
 
-  make_knot_tile(tile_width, tile_height) {
+  intersection() {
+    knot_tile_boundary(tile_width, tile_height);
     difference() {
       curve(tile_width, tile_height, ribbon_width);
       translate([-tile_width/4+gap2/4, -tile_width/4+gap2/4, 0])
@@ -470,7 +468,8 @@ module cross_curve(tile_width = 5, tile_height, ribbon_width, gap) {
 }
 
 module round_corner(tile_width = 5, tile_height, ribbon_width) {
-  make_knot_tile(tile_width, tile_height) {
+  intersection() {
+    knot_tile_boundary(tile_width, tile_height);
     translate([-tile_width/2, -tile_width/2, 0]) rotate_extrude()
       translate([tile_width-ribbon_width/2, 0, 0])
         square([ribbon_width, tile_height*2], center = true);
@@ -478,16 +477,20 @@ module round_corner(tile_width = 5, tile_height, ribbon_width) {
 }
 
 module square_corner(tile_width = 5, tile_height, ribbon_width) {
-  make_knot_tile(tile_width, tile_height) {
-    translate([(tile_width-ribbon_width)/2, 0, 0])
-      cube([ribbon_width,tile_width*2, tile_height*2], center = true);
-    translate([0, (tile_width-ribbon_width)/2, 0])
-      cube([tile_width*2,ribbon_width, tile_height*2], center = true);
+  intersection() {
+    knot_tile_boundary(tile_width, tile_height);
+    union() {
+      translate([(tile_width-ribbon_width)/2, 0, 0])
+        cube([ribbon_width,tile_width*2, tile_height*2], center = true);
+      translate([0, (tile_width-ribbon_width)/2, 0])
+        cube([tile_width*2,ribbon_width, tile_height*2], center = true);
+    }
   }
 }
 
 module straight(tile_width = 5, tile_height, ribbon_width) {
-  make_knot_tile(tile_width, tile_height) {
+  intersection() {
+    knot_tile_boundary(tile_width, tile_height);
     translate([(tile_width-ribbon_width)/2, 0, 0])
       cube([ribbon_width,tile_width*2, tile_height*2], center = true);
   }
