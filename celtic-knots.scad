@@ -403,7 +403,8 @@ module make_knot_piece(p, tile_width, tile_height, ribbon_width, gap) {
 
 module knot_tile_boundary(tile_width, tile_height) {
   translate([0, 0, 1.001*tile_height/2])
-    cube([tile_width*1.001, tile_width*1.001, tile_height*1.001], center = true);
+    cube([tile_width*1.001, tile_width*1.001, tile_height*1.001],
+         center = true);
 }
 
 module cross(tile_width, tile_height, ribbon_width, gap) {
