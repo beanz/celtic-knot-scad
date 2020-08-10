@@ -290,7 +290,7 @@ module knot_tile(c, tile_width = 5, tile_height, ribbon_width, gap) {
   rth = tile_height != undef ? tile_height : tile_width/2;
   rrw = ribbon_width != undef ? ribbon_width : tile_width/sqrt(2);
   rgap = gap != undef ? gap : tile_width/(6*sqrt(2));
- 
+
   if (c == " ") {                                                // Blank
 
   } else if (c == ",") {                                         // Corners
@@ -426,7 +426,7 @@ module cross(tile_width, tile_height, ribbon_width, gap) {
   }
 }
 
-module curve(tile_width = 5, tile_height, ribbon_width) {
+module curve(tile_width = 5, tile_height, ribbon_width, gap) {
 
   cra=66;
   cr=.5*tile_width/cos(cra);
@@ -468,7 +468,7 @@ module cross_curve(tile_width = 5, tile_height, ribbon_width, gap) {
   }
 }
 
-module round_corner(tile_width = 5, tile_height, ribbon_width) {
+module round_corner(tile_width = 5, tile_height, ribbon_width, gap) {
   intersection() {
     knot_tile_boundary(tile_width, tile_height);
     translate([-tile_width/2, -tile_width/2, 0]) rotate_extrude()
@@ -477,7 +477,7 @@ module round_corner(tile_width = 5, tile_height, ribbon_width) {
   }
 }
 
-module square_corner(tile_width = 5, tile_height, ribbon_width) {
+module square_corner(tile_width = 5, tile_height, ribbon_width, gap) {
   intersection() {
     knot_tile_boundary(tile_width, tile_height);
     union() {
@@ -489,7 +489,7 @@ module square_corner(tile_width = 5, tile_height, ribbon_width) {
   }
 }
 
-module straight(tile_width = 5, tile_height, ribbon_width) {
+module straight(tile_width = 5, tile_height, ribbon_width, gap) {
   intersection() {
     knot_tile_boundary(tile_width, tile_height);
     translate([(tile_width-ribbon_width)/2, 0, 0])
